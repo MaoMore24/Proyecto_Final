@@ -9,15 +9,14 @@ import java.sql.SQLException;
 public class Conexion {
     Connection con = null;
     
-    String base = "hospital";//Nombre de la base de datos
-    String url = "jdbc:mysql://localhost:3306/" + base; //Direccion, puerto y nombre de la Base de Datos
-    String user = "root"; //Usuario de Acceso a MySQL
-    String password = ""; //Password del usuario
+    String base = "hospital";
+    String url = "jdbc:mysql://localhost:3306/" + base + "?useSSL=false&serverTimezone=UTC"; 
+    String user = "root"; 
+    String password = ""; 
     
-public Connection getConexion() {
-
+    public Connection getConexion() {
         try {
-            Class.forName("com.mysql.jdbc.Connection");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e);

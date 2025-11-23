@@ -57,6 +57,11 @@ public class frmSistema extends javax.swing.JFrame {
         btnInicio.setMinimumSize(new java.awt.Dimension(60, 53));
         btnInicio.setPreferredSize(new java.awt.Dimension(60, 53));
         btnInicio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnInicio);
 
         btnPacientes.setBackground(new java.awt.Color(0, 102, 153));
@@ -73,6 +78,11 @@ public class frmSistema extends javax.swing.JFrame {
         btnPacientes.setMinimumSize(new java.awt.Dimension(60, 53));
         btnPacientes.setPreferredSize(new java.awt.Dimension(60, 53));
         btnPacientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacientesActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPacientes);
 
         btnCitas.setBackground(new java.awt.Color(0, 102, 153));
@@ -89,6 +99,11 @@ public class frmSistema extends javax.swing.JFrame {
         btnCitas.setMinimumSize(new java.awt.Dimension(60, 53));
         btnCitas.setPreferredSize(new java.awt.Dimension(60, 53));
         btnCitas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitasActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnCitas);
 
         btnMedicos.setBackground(new java.awt.Color(0, 102, 153));
@@ -105,6 +120,11 @@ public class frmSistema extends javax.swing.JFrame {
         btnMedicos.setMinimumSize(new java.awt.Dimension(60, 53));
         btnMedicos.setPreferredSize(new java.awt.Dimension(60, 53));
         btnMedicos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedicosActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnMedicos);
 
         btnExpedientes.setBackground(new java.awt.Color(0, 102, 153));
@@ -121,7 +141,34 @@ public class frmSistema extends javax.swing.JFrame {
         btnExpedientes.setMinimumSize(new java.awt.Dimension(60, 53));
         btnExpedientes.setPreferredSize(new java.awt.Dimension(60, 53));
         btnExpedientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExpedientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpedientesActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnExpedientes);
+        
+        btnAgenda = new javax.swing.JButton();
+        btnAgenda.setBackground(new java.awt.Color(0, 102, 153));
+        btnAgenda.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        btnAgenda.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/agenda.png"))); // NOI18N
+        btnAgenda.setText("Mi Agenda");
+        btnAgenda.setFocusable(false);
+        btnAgenda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAgenda.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAgenda.setIconTextGap(8);
+        btnAgenda.setMargin(new java.awt.Insets(6, 14, 3, 14));
+        btnAgenda.setMaximumSize(new java.awt.Dimension(135, 60));
+        btnAgenda.setMinimumSize(new java.awt.Dimension(60, 53));
+        btnAgenda.setPreferredSize(new java.awt.Dimension(60, 53));
+        btnAgenda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // Action handled by controller
+            }
+        });
+        jToolBar1.add(btnAgenda);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,6 +208,26 @@ public class frmSistema extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInicioActionPerformed
+
+    private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPacientesActionPerformed
+
+    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCitasActionPerformed
+
+    private void btnMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMedicosActionPerformed
+
+    private void btnExpedientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExpedientesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -186,6 +253,7 @@ public class frmSistema extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCitas;
     public javax.swing.JButton btnExpedientes;
+    public javax.swing.JButton btnAgenda;
     public javax.swing.JButton btnInicio;
     public javax.swing.JButton btnMedicos;
     public javax.swing.JButton btnPacientes;
