@@ -89,8 +89,8 @@ public class CtrlMedico implements ActionListener {
         
         if (e.getSource() == frm.btnGuardar) {
             mod.setUsername(frm.txtUsuario.getText());
-            // Usamos getText() porque el componente es un JTextField
-            mod.setPassword(frm.txtPassword.getText());
+            // Usamos getPassword() por seguridad (requiere que el componente sea JPasswordField)
+            mod.setPassword(new String(frm.txtPassword.getPassword()));
             mod.setNombre(frm.txtNombre.getText());
             mod.setApellido(frm.txtApellido.getText());
             mod.setEmail(frm.txtEmail.getText());
