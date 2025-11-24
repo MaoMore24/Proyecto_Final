@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Modelo.Usuario;
@@ -14,7 +13,6 @@ public class CtrlSistema implements ActionListener {
         this.frm = frm;
         this.usuario = usuario;
         
-        // Listeners
         this.frm.btnSalir.addActionListener(this);
         this.frm.btnInicio.addActionListener(this);
         this.frm.btnPacientes.addActionListener(this);
@@ -27,29 +25,21 @@ public class CtrlSistema implements ActionListener {
     public void iniciar() {
         frm.setTitle("Sistema Hospitalario - Usuario: " + usuario.getUsername());
         frm.setLocationRelativeTo(null);
-        frm.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); // Pantalla completa
-        
-        // Control de Roles
+        frm.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         aplicarPermisos();
-        
         frm.setVisible(true);
     }
     
     private void aplicarPermisos() {
         String rol = usuario.getNombre_rol();
-        
-        // Si NO es Administrador, ocultar gestión de médicos
         if (!"Administrador".equalsIgnoreCase(rol)) {
             frm.btnMedicos.setVisible(false);
         }
-        
-        // Si es Paciente, ocultar gestión de Pacientes (solo ve sus citas)
         if ("Paciente".equalsIgnoreCase(rol)) {
             frm.btnPacientes.setVisible(false);
             frm.btnExpedientes.setVisible(false); 
             frm.btnAgenda.setVisible(false); 
         }
-        
         if (!"Medico".equalsIgnoreCase(rol)) {
             frm.btnAgenda.setVisible(false); 
         }
@@ -66,7 +56,6 @@ public class CtrlSistema implements ActionListener {
             Modelo.Medico modMed = new Modelo.Medico();
             Modelo.ConsultasMedico modCMed = new Modelo.ConsultasMedico();
             Vista.frmMedicos frmMed = new Vista.frmMedicos();
-            
             CtrlMedico ctrlMed = new CtrlMedico(modMed, modCMed, frmMed);
             ctrlMed.iniciar();
             frmMed.setVisible(true);
@@ -76,8 +65,6 @@ public class CtrlSistema implements ActionListener {
             Modelo.Cita modCita = new Modelo.Cita();
             Modelo.ConsultasCita modCCita = new Modelo.ConsultasCita();
             Vista.frmAgendarCitas frmCita = new Vista.frmAgendarCitas();
-            
-            // Pasamos el usuario actual (paciente) al controlador
             CtrlAgendarCita ctrlCita = new CtrlAgendarCita(modCita, modCCita, frmCita, usuario);
             ctrlCita.iniciar();
         }
@@ -85,8 +72,6 @@ public class CtrlSistema implements ActionListener {
         if (e.getSource() == frm.btnAgenda) {
             Modelo.ConsultasCita modCCita = new Modelo.ConsultasCita();
             Vista.frmAgenda frmAg = new Vista.frmAgenda();
-            
-            // Pasamos el usuario actual (médico) al controlador
             CtrlAgenda ctrlAg = new CtrlAgenda(modCCita, frmAg, usuario);
             ctrlAg.iniciar();
             frmAg.setVisible(true);
