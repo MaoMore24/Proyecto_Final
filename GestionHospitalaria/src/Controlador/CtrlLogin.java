@@ -31,7 +31,6 @@ public class CtrlLogin implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == frm.btnIngresar) {
             String usuario = frm.txtUsuario.getText();
-            // Usamos getPassword() asumiendo que es JPasswordField. Si es TextField, cambiar a getText()
             String password = new String(frm.txtPassword.getPassword());
 
             if (usuario.isEmpty() || password.isEmpty()) {
@@ -42,12 +41,9 @@ public class CtrlLogin implements ActionListener {
             Usuario usuarioLogueado = modC.login(usuario, password);
 
             if (usuarioLogueado != null) {
-                // Abrir menú principal con el controlador
                 frmSistema frmMenu = new frmSistema();
                 CtrlSistema ctrlSistema = new CtrlSistema(frmMenu, usuarioLogueado);
                 ctrlSistema.iniciar();
-                
-                // Cerrar login
                 frm.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
