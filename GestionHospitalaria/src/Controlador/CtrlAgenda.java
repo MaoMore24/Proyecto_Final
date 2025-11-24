@@ -1,14 +1,14 @@
 package Controlador;
 
+import Modelo.Cita;
 import Modelo.ConsultasCita;
 import Modelo.Usuario;
 import Vista.frmAgenda;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,28 +29,44 @@ public class CtrlAgenda implements ActionListener {
         vista.setTitle("Agenda - Dr. " + medico.getNombre() + " " + medico.getApellido());
         vista.setLocationRelativeTo(null);
         
-        // Set current date by default
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // Set current date by default (dd-MM-yyyy para ser consistente con el resto)
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         vista.txtFecha.setText(sdf.format(new Date()));
         
         cargarAgenda();
     }
     
     private void cargarAgenda() {
-        String fecha = vista.txtFecha.getText();
-        if (fecha.isEmpty()) return;
+        String fechaStr = vista.txtFecha.getText();
+        if (fechaStr.isEmpty()) return;
+        
+        Date fechaDate = null;
+        try {
+            fechaDate = new SimpleDateFormat("dd-MM-yyyy").parse(fechaStr);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Use dd-MM-yyyy");
+            return;
+        }
         
         DefaultTableModel model = (DefaultTableModel) vista.tblAgenda.getModel();
         model.setRowCount(0); // Clear table
         
-        List<Map<String, String>> citas = consultas.listarAgenda(medico.getId(), fecha);
+        // Asegurar columnas
+        if (model.getColumnCount() == 0) {
+            model.addColumn("Hora");
+            model.addColumn("Paciente");
+            model.addColumn("Motivo");
+            model.addColumn("Estado");
+        }
         
-        for (Map<String, String> cita : citas) {
+        ArrayList<Cita> citas = consultas.listarAgenda(medico.getId(), fechaDate);
+        
+        for (Cita c : citas) {
             model.addRow(new Object[]{
-                cita.get("hora"),
-                cita.get("paciente"),
-                cita.get("motivo"),
-                cita.get("estado")
+                c.getHora(),
+                c.getNombreMedico(), // Aquí guardamos el nombre del paciente temporalmente en el modelo
+                c.getMotivo(),
+                c.getEstado()
             });
         }
     }

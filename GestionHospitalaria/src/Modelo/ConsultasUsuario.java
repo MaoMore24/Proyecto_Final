@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 public class ConsultasUsuario extends Conexion {
 
     // Método para encriptar contraseña con SHA-256
-    private String sha256(String base) {
+    protected String sha256(String base) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));

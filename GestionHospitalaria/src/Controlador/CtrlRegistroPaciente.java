@@ -45,14 +45,14 @@ public class CtrlRegistroPaciente implements ActionListener {
             mod.setNombre(frm.txtNombre.getText());
             mod.setApellido(frm.txtApellido.getText());
             mod.setEmail(frm.txtEmail.getText());
-            mod.setTelefono(frm.txtFechaNacimiento.getText()); // Aseguramos que este sea el teléfono
+            mod.setTelefono(frm.txtTelefono.getText()); // Corrección: Leer del campo teléfono
             mod.setDireccion(frm.txtDireccion.getText());
             
             // Manejo de fecha (formato dd-MM-yyyy o dd/MM/yyyy)
             String fechaStr = "";
             try {
-                // LEER DEL CAMPO DE FECHA, NO DEL TELEFONO
-                fechaStr = frm.txtTelefono.getText().trim(); 
+                // Corrección: Leer del campo fecha
+                fechaStr = frm.txtFechaNacimiento.getText().trim(); 
                 
                 // Reemplazar barras por guiones para estandarizar
                 fechaStr = fechaStr.replace("/", "-");

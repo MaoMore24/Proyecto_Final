@@ -22,7 +22,7 @@ public class ConsultasMedico extends ConsultasUsuario {
             String sqlUsuario = "INSERT INTO usuario (username, password, nombre, apellido, email, id_rol) VALUES (?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, med.getUsername());
-            ps.setString(2, med.getPassword());
+            ps.setString(2, sha256(med.getPassword())); // Encriptar contraseña
             ps.setString(3, med.getNombre());
             ps.setString(4, med.getApellido());
             ps.setString(5, med.getEmail());

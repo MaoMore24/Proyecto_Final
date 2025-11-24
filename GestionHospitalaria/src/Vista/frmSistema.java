@@ -24,6 +24,8 @@ public class frmSistema extends javax.swing.JFrame {
         btnCitas = new javax.swing.JButton();
         btnMedicos = new javax.swing.JButton();
         btnExpedientes = new javax.swing.JButton();
+        btnAgenda = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestión Hospitalaria");
@@ -147,13 +149,12 @@ public class frmSistema extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnExpedientes);
-        
-        btnAgenda = new javax.swing.JButton();
+
         btnAgenda.setBackground(new java.awt.Color(0, 102, 153));
         btnAgenda.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         btnAgenda.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/agenda.png"))); // NOI18N
-        btnAgenda.setText("Mi Agenda");
+        btnAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/agenda (2).png"))); // NOI18N
+        btnAgenda.setText("Mi agenda");
         btnAgenda.setFocusable(false);
         btnAgenda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAgenda.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -161,14 +162,15 @@ public class frmSistema extends javax.swing.JFrame {
         btnAgenda.setMargin(new java.awt.Insets(6, 14, 3, 14));
         btnAgenda.setMaximumSize(new java.awt.Dimension(135, 60));
         btnAgenda.setMinimumSize(new java.awt.Dimension(60, 53));
-        btnAgenda.setPreferredSize(new java.awt.Dimension(60, 53));
         btnAgenda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAgenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // Action handled by controller
+                btnAgendaActionPerformed(evt);
             }
         });
         jToolBar1.add(btnAgenda);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logohospital.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,10 +178,15 @@ public class frmSistema extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,6 +195,8 @@ public class frmSistema extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
         );
@@ -228,6 +237,10 @@ public class frmSistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExpedientesActionPerformed
 
+    private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgendaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -251,14 +264,15 @@ public class frmSistema extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAgenda;
     public javax.swing.JButton btnCitas;
     public javax.swing.JButton btnExpedientes;
-    public javax.swing.JButton btnAgenda;
     public javax.swing.JButton btnInicio;
     public javax.swing.JButton btnMedicos;
     public javax.swing.JButton btnPacientes;
     public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
