@@ -1,3 +1,4 @@
+
 package Controlador;
 
 import Modelo.Usuario;
@@ -71,6 +72,24 @@ public class CtrlSistema implements ActionListener {
             frmMed.setVisible(true);
         }
         
-        // Aquí puedes agregar la lógica para los otros botones cuando tengamos sus controladores listos
+        if (e.getSource() == frm.btnCitas) {
+            Modelo.Cita modCita = new Modelo.Cita();
+            Modelo.ConsultasCita modCCita = new Modelo.ConsultasCita();
+            Vista.frmAgendarCitas frmCita = new Vista.frmAgendarCitas();
+            
+            // Pasamos el usuario actual (paciente) al controlador
+            CtrlAgendarCita ctrlCita = new CtrlAgendarCita(modCita, modCCita, frmCita, usuario);
+            ctrlCita.iniciar();
+        }
+        
+        if (e.getSource() == frm.btnAgenda) {
+            Modelo.ConsultasCita modCCita = new Modelo.ConsultasCita();
+            Vista.frmAgenda frmAg = new Vista.frmAgenda();
+            
+            // Pasamos el usuario actual (médico) al controlador
+            CtrlAgenda ctrlAg = new CtrlAgenda(modCCita, frmAg, usuario);
+            ctrlAg.iniciar();
+            frmAg.setVisible(true);
+        }
     }
 }
