@@ -13,8 +13,6 @@ public class ConsultasPaciente extends ConsultasUsuario {
         Connection con = getConexion();
         
         try {
-            System.out.println("DEBUG: Conectando a " + con.getMetaData().getURL());
-            System.out.println("DEBUG: Usuario DB: " + con.getMetaData().getUserName());
             con.setAutoCommit(false); // Iniciar transacción
             
             // 1. Insertar en tabla USUARIO

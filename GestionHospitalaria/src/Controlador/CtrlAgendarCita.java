@@ -97,6 +97,8 @@ public class CtrlAgendarCita implements ActionListener {
             }
             
             mod.setIdPaciente(usuarioActual.getId());
+            mod.setIdMedico(idMedico); // FIX: Establecer el médico seleccionado
+            mod.setFecha(new java.sql.Date(fechaUtil.getTime())); // FIX: Establecer la fecha
             mod.setMotivo(frm.txtMotivo.getText());
             
             if (modC.agendarCita(mod)) {
