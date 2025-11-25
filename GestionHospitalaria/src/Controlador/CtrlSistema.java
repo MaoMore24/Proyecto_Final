@@ -76,5 +76,13 @@ public class CtrlSistema implements ActionListener {
             ctrlAg.iniciar();
             frmAg.setVisible(true);
         }
+        
+        if (e.getSource() == frm.btnExpedientes) {
+            Modelo.ConsultasExpediente modCExp = new Modelo.ConsultasExpediente();
+            Vista.frmExpediente frmExp = new Vista.frmExpediente();
+            
+            CtrlExpediente ctrlExp = new CtrlExpediente(modCExp, frmExp, usuario);
+            ctrlExp.iniciar();
+        }
     }
 }
