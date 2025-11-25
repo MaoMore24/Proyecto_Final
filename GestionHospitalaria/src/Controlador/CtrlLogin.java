@@ -13,6 +13,7 @@ public class CtrlLogin implements ActionListener {
     private ConsultasUsuario modC;
     private frmLogin frm;
 
+    //Constructor
     public CtrlLogin(Usuario mod, ConsultasUsuario modC, frmLogin frm) {
         this.mod = mod;
         this.modC = modC;
