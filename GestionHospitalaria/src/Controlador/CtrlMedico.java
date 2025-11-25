@@ -47,30 +47,6 @@ public class CtrlMedico implements ActionListener {
     }
     
     private void listar() {
-        ArrayList<Medico> lista = modC.listarMedicos();
-        DefaultTableModel modelo = (DefaultTableModel) frm.jtMedicos.getModel();
-        modelo.setRowCount(0); // Limpiar tabla
-        
-        // Asegúrate de que tu JTable tenga las columnas: ID, Nombre, Apellido, Especialidad, Cédula
-        if (modelo.getColumnCount() == 0) {
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Especialidad");
-            modelo.addColumn("Cédula");
-        }
-        
-        for (Medico m : lista) {
-            Object[] fila = {
-                m.getId(),
-                m.getNombre(),
-                m.getApellido(),
-                m.getNombreEspecialidad(),
-                m.getCedula()
-            };
-            modelo.addRow(fila);
-        }
-    }
     
     private void seleccionarMedico() {
         int fila = frm.jtMedicos.getSelectedRow();

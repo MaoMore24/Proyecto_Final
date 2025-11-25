@@ -73,15 +73,34 @@ public class ConsultasCita extends ConsultasUsuario {
     
     public boolean agendarCita(Cita cita) {
         Connection con = getConexion();
-        String sql = "INSERT INTO cita (id_paciente, id_medico, fecha, hora, motivo, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        // Combine Date and Time into Timestamp for DB
+        String sql = "INSERT INTO cita (id_paciente, id_medico, fecha_hora, motivo, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, cita.getIdPaciente());
             ps.setInt(2, cita.getIdMedico());
-            ps.setDate(3, cita.getFecha());
-            ps.setTime(4, cita.getHora());
-            ps.setString(5, cita.getMotivo());
-            ps.setString(6, "Pendiente");
+            
+            // Combine fecha and hora
+            java.util.Date fechaUtil = cita.getFecha();
+            java.sql.Time horaSql = cita.getHora();
+            
+            // Create base calendar/date
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(fechaUtil);
+            
+            // Extract time parts
+            java.util.Calendar timeCal = java.util.Calendar.getInstance();
+            timeCal.setTime(horaSql);
+            
+            cal.set(java.util.Calendar.HOUR_OF_DAY, timeCal.get(java.util.Calendar.HOUR_OF_DAY));
+            cal.set(java.util.Calendar.MINUTE, timeCal.get(java.util.Calendar.MINUTE));
+            cal.set(java.util.Calendar.SECOND, timeCal.get(java.util.Calendar.SECOND));
+            
+            java.sql.Timestamp fechaHora = new java.sql.Timestamp(cal.getTimeInMillis());
+            
+            ps.setTimestamp(3, fechaHora);
+            ps.setString(4, cita.getMotivo());
+            ps.setString(5, "Pendiente");
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -93,7 +112,7 @@ public class ConsultasCita extends ConsultasUsuario {
     public ArrayList<Cita> listarCitasPendientes(int idPaciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         Connection con = getConexion();
-        String sql = "SELECT c.fecha, c.hora, u.nombre, u.apellido, e.nombre as esp " +
+        String sql = "SELECT c.fecha_hora, u.nombre, u.apellido, e.nombre as esp " +
                      "FROM cita c " +
                      "JOIN medico m ON c.id_medico = m.id " +
                      "JOIN usuario u ON m.id = u.id " +
@@ -105,8 +124,10 @@ public class ConsultasCita extends ConsultasUsuario {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 Cita c = new Cita();
-                c.setFecha(rs.getDate("fecha"));
-                c.setHora(rs.getTime("hora"));
+                java.sql.Timestamp ts = rs.getTimestamp("fecha_hora");
+                c.setFecha(new java.sql.Date(ts.getTime()));
+                c.setHora(new java.sql.Time(ts.getTime()));
+                
                 c.setNombreMedico(rs.getString("nombre") + " " + rs.getString("apellido"));
                 c.setEspecialidad(rs.getString("esp"));
                 lista.add(c);
@@ -117,14 +138,15 @@ public class ConsultasCita extends ConsultasUsuario {
         return lista;
     }
 
-    // Método para listar agenda del médico (Simplificado con objeto Cita)
+    // Método para listar agenda del médico
     public ArrayList<Cita> listarAgenda(int idMedico, java.util.Date fecha) {
         ArrayList<Cita> lista = new ArrayList<>();
         Connection con = getConexion();
-        String sql = "SELECT c.hora, u.nombre, u.apellido, c.motivo, c.estado " +
+        // Filter by DATE part of fecha_hora
+        String sql = "SELECT c.fecha_hora, u.nombre, u.apellido, c.motivo, c.estado " +
                      "FROM cita c " +
                      "JOIN usuario u ON c.id_paciente = u.id " +
-                     "WHERE c.id_medico = ? AND c.fecha = ?";
+                     "WHERE c.id_medico = ? AND DATE(c.fecha_hora) = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -134,13 +156,10 @@ public class ConsultasCita extends ConsultasUsuario {
             
             while(rs.next()) {
                 Cita c = new Cita();
-                c.setHora(rs.getTime("hora"));
-                // Usamos un campo auxiliar en Cita para guardar el nombre del paciente temporalmente
-                // Ojo: Cita tiene 'nombreMedico', podríamos agregar 'nombrePaciente' o reutilizar uno si solo es para mostrar
-                // Para hacerlo bien, agregaremos un campo 'nombrePaciente' en la clase Cita si no existe, 
-                // o usaremos 'nombreMedico' como comodín (no recomendado) o simplemente concatenamos en motivo.
-                // Vamos a asumir que agregaremos 'nombrePaciente' en Cita.java después.
-                // Por ahora, guardaré el nombre del paciente en 'nombreMedico' SOLO para visualización en esta tabla
+                java.sql.Timestamp ts = rs.getTimestamp("fecha_hora");
+                c.setFecha(new java.sql.Date(ts.getTime()));
+                c.setHora(new java.sql.Time(ts.getTime()));
+                
                 c.setNombreMedico(rs.getString("nombre") + " " + rs.getString("apellido")); 
                 c.setMotivo(rs.getString("motivo"));
                 c.setEstado(rs.getString("estado"));

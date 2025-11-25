@@ -53,6 +53,12 @@ public class ConsultasPaciente extends ConsultasUsuario {
             ps.setString(4, pac.getDireccion());
             ps.execute();
             
+            // 3. Crear Expediente Médico inicial
+            String sqlExpediente = "INSERT INTO expediente (id_paciente, fecha_creacion) VALUES (?, NOW())";
+            ps = con.prepareStatement(sqlExpediente);
+            ps.setInt(1, idUsuario);
+            ps.execute();
+            
             con.commit(); // Confirmar cambios
             return true;
             

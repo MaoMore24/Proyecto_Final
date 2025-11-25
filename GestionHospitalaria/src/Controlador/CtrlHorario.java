@@ -2,7 +2,7 @@ package Controlador;
 
 import Modelo.ConsultasHorario;
 import Modelo.HorarioMedico;
-import Vista.frmHorario;
+import Vista.frmGestionHorarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
@@ -12,9 +12,9 @@ public class CtrlHorario implements ActionListener {
 
     private final HorarioMedico modelo;
     private final ConsultasHorario consultas;
-    private final frmHorario vista;
+    private final frmGestionHorarios vista;
 
-    public CtrlHorario(HorarioMedico modelo, ConsultasHorario consultas, frmHorario vista) {
+    public CtrlHorario(HorarioMedico modelo, ConsultasHorario consultas, frmGestionHorarios vista) {
         this.modelo = modelo;
         this.consultas = consultas;
         this.vista = vista;
@@ -33,7 +33,7 @@ public class CtrlHorario implements ActionListener {
     public void limpiar() {
         vista.txtId.setText("");
         vista.txtIdMedico.setText("");
-        vista.cbxDia.setSelectedIndex(0);
+        vista.cmbDia.setSelectedIndex(0);
         vista.txtHoraInicio.setText("");
         vista.txtHoraFin.setText("");
         vista.txtIdMedico.requestFocus();
@@ -45,7 +45,7 @@ public class CtrlHorario implements ActionListener {
         if (e.getSource() == vista.btnGuardar) {
             try {
                 modelo.setIdMedico(Integer.parseInt(vista.txtIdMedico.getText()));
-                modelo.setDiaSemana(vista.cbxDia.getSelectedItem().toString());
+                modelo.setDiaSemana(vista.cmbDia.getSelectedItem().toString());
                 modelo.setHoraInicio(Time.valueOf(vista.txtHoraInicio.getText()));
                 modelo.setHoraFin(Time.valueOf(vista.txtHoraFin.getText()));
             } catch (Exception ex) {
@@ -67,7 +67,7 @@ public class CtrlHorario implements ActionListener {
             try {
                 modelo.setId(Integer.parseInt(vista.txtId.getText()));
                 modelo.setIdMedico(Integer.parseInt(vista.txtIdMedico.getText()));
-                modelo.setDiaSemana(vista.cbxDia.getSelectedItem().toString());
+                modelo.setDiaSemana(vista.cmbDia.getSelectedItem().toString());
                 modelo.setHoraInicio(Time.valueOf(vista.txtHoraInicio.getText()));
                 modelo.setHoraFin(Time.valueOf(vista.txtHoraFin.getText()));
             } catch (Exception ex) {
@@ -114,7 +114,7 @@ public class CtrlHorario implements ActionListener {
             if (consultas.buscar(modelo)) {
                 vista.txtId.setText(String.valueOf(modelo.getId()));
                 vista.txtIdMedico.setText(String.valueOf(modelo.getIdMedico()));
-                vista.cbxDia.setSelectedItem(modelo.getDiaSemana());
+                vista.cmbDia.setSelectedItem(modelo.getDiaSemana());
                 vista.txtHoraInicio.setText(modelo.getHoraInicio().toString());
                 vista.txtHoraFin.setText(modelo.getHoraFin().toString());
                 JOptionPane.showMessageDialog(null, "Horario encontrado");
