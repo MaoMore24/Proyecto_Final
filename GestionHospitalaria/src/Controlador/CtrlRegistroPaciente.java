@@ -5,7 +5,6 @@ import Modelo.Paciente;
 import Vista.frmRegistroPacientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import javax.swing.JOptionPane;
 
 public class CtrlRegistroPaciente implements ActionListener {
