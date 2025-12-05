@@ -1,7 +1,6 @@
 package Controlador;
 
 import Modelo.Usuario;
-import Vista.frmLogin;
 import Vista.frmSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
