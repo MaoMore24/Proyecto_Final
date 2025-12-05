@@ -10,13 +10,13 @@ public class Conexion {
     Connection con = null;
     
     String base = "hospital";
-    String url = "jdbc:mysql://localhost:3306/" + base + "?useSSL=false&serverTimezone=UTC"; 
+    String url = "jdbc:mysql://localhost:3306/" + base; 
     String user = "root"; 
     String password = ""; 
     
     public Connection getConexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // FIX: Driver correcto
+            Class.forName("com.mysql.jdbc.Driver"); // Driver compatible con MySQL Connector 5.1.39
             con = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e);

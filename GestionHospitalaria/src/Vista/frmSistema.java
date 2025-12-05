@@ -70,7 +70,7 @@ public class frmSistema extends javax.swing.JFrame {
         btnPacientes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         btnPacientes.setForeground(new java.awt.Color(255, 255, 255));
         btnPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user (1).png"))); // NOI18N
-        btnPacientes.setText("Pacientes");
+        btnPacientes.setText("Registro");
         btnPacientes.setFocusable(false);
         btnPacientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPacientes.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

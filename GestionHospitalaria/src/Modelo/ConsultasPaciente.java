@@ -21,7 +21,7 @@ public class ConsultasPaciente extends ConsultasUsuario {
             
             ps = con.prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pac.getUsername());
-            ps.setString(2, sha256(pac.getPassword())); // Encriptamos la contraseña
+            ps.setString(2, pac.getPassword()); // Sin encriptación
             ps.setString(3, pac.getNombre());
             ps.setString(4, pac.getApellido());
             ps.setString(5, pac.getEmail());

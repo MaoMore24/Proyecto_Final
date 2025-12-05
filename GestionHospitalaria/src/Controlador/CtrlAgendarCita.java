@@ -37,10 +37,10 @@ public class CtrlAgendarCita implements ActionListener {
         frm.setTitle("Agendar Cita Médica");
         frm.setLocationRelativeTo(null);
         frm.setVisible(true);
-        // listarCitas(); // Eliminado porque no hay tabla
+        
     }
     
-    // Método listarCitas eliminado
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -65,13 +65,10 @@ public class CtrlAgendarCita implements ActionListener {
             String med = frm.cmbMedico.getSelectedItem().toString();
             int idMedico = Integer.parseInt(med.split(" - ")[0]);
             
-            // Fecha (Asumiendo JCalendar o txtFecha)
+            // Fecha
             java.util.Date fechaUtil = null;
             try {
-                 // SI USAS JCALENDAR:
-                 // fechaUtil = frm.jCalendar1.getDate();
                  
-                 // SI USAS TXTFECHA (dd-MM-yyyy):
                  String fechaStr = frm.txtFecha.getText();
                  fechaUtil = new java.text.SimpleDateFormat("dd-MM-yyyy").parse(fechaStr);
                  
