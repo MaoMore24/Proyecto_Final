@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Modelo.Usuario;
@@ -69,4 +68,3 @@ public class ctrlSistema implements ActionListener {
     }
 }
     
-
