@@ -1,7 +1,7 @@
 
 package gestionhospitalaria;
 
-import Controlador.CtrlLogin;
+import Controlador.ctrlLogin;
 import Modelo.ConsultasUsuario;
 import Modelo.Usuario;
 import Vista.frmLogin;
@@ -14,7 +14,7 @@ public class Principal {
         ConsultasUsuario modC = new ConsultasUsuario();
         frmLogin frm = new frmLogin();
         
-        CtrlLogin ctrl = new CtrlLogin(mod, modC, frm);
+        ctrlLogin ctrl = new ctrlLogin(mod, modC, frm);
         ctrl.iniciar();
     }
     
