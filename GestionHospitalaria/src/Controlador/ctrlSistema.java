@@ -4,9 +4,15 @@ import Modelo.Usuario;
 import Modelo.Cita;
 import Modelo.ConsultasCita;
 import Modelo.ConsultasUsuario;
+import Modelo.ConsultasEnfermeria;
+import Modelo.ConsultasLaboratorio;
+import Modelo.Enfermeria;
+import Modelo.ResultadoLaboratorio;
 import Vista.frmSistema;
 import Vista.frmAgendarCitas;
 import Vista.frmAgregarUsuarios;
+import Vista.frmEnfermeria;
+import Vista.frmLaboratorio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -53,6 +59,7 @@ public class ctrlSistema implements ActionListener {
         frm.btnCitas.setVisible(false);
         frm.btnExpedientes.setVisible(false);
         frm.btnAgenda.setVisible(false);
+        // Nota: btnEnfermeria y btnLaboratorio se agregarán en frmSistema.form
         
         // ====== Mostrar solo los botones según el rol ======
         
@@ -76,14 +83,12 @@ public class ctrlSistema implements ActionListener {
             // btnCitas NO visible (no agendan, solo ven su agenda)
         }
         else if ("Enfermero".equalsIgnoreCase(rol)) {
-            // ✅ ENFERMERO - Ve expedientes
-            frm.btnExpedientes.setVisible(true); // Ver expedientes
-            // Puedes agregar más botones después si lo necesitas
+            // ✅ ENFERMERO - Accede a su módulo específico
+            frm.btnExpedientes.setVisible(true); // Abre frmEnfermeria
         }
         else if ("Laboratorio".equalsIgnoreCase(rol)) {
-            // ✅ LABORATORIO - Ve expedientes para agregar resultados
-            frm.btnExpedientes.setVisible(true); // Ver expedientes
-            // Puedes agregar más botones después si lo necesitas
+            // ✅ LABORATORIO - Accede a su módulo específico
+            frm.btnExpedientes.setVisible(true); // Abre frmLaboratorio
         }
         
         // El botón "Inicio" siempre está visible (botón principal del toolbar)
@@ -128,9 +133,32 @@ public class ctrlSistema implements ActionListener {
         }
         
         if (e.getSource() == frm.btnExpedientes) {
-            // Abrir expedientes
-            System.out.println("Abriendo expedientes...");
-            // TODO: Implementar cuando sea necesario
+            // Abrir formulario según el rol
+            String rol = usuario.getNombre_rol();
+            
+            if ("Enfermero".equalsIgnoreCase(rol)) {
+                // Patrón universitario MVC
+                Enfermeria modelo = new Enfermeria();
+                ConsultasEnfermeria consultas = new ConsultasEnfermeria();
+                frmEnfermeria vista = new frmEnfermeria();
+                CtrlEnfermeria ctrl = new CtrlEnfermeria(modelo, consultas, vista, usuario.getId());
+                ctrl.iniciar();
+                vista.setVisible(true);
+            } 
+            else if ("Laboratorio".equalsIgnoreCase(rol)) {
+                // Patrón universitario MVC
+                ResultadoLaboratorio modelo = new ResultadoLaboratorio();
+                ConsultasLaboratorio consultas = new ConsultasLaboratorio();
+                frmLaboratorio vista = new frmLaboratorio();
+                CtrlLaboratorio ctrl = new CtrlLaboratorio(modelo, consultas, vista, usuario.getId());
+                ctrl.iniciar();
+                vista.setVisible(true);
+            }
+            else {
+                // Para otros roles (médico, admin), abrir expedientes normal
+                System.out.println("Abriendo expedientes...");
+                // TODO: Implementar cuando sea necesario
+            }
         }
     }
 }
