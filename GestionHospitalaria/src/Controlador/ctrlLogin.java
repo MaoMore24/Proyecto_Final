@@ -2,9 +2,11 @@ package Controlador;
 
 import Modelo.ConsultasUsuario;
 import Modelo.Usuario;
+import Modelo.Paciente;
+import Modelo.ConsultasPaciente;
 import Vista.frmLogin;
 import Vista.frmSistema;
-import Controlador.ctrlSistema;
+import Vista.frmRegistroPacientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -19,6 +21,7 @@ public class ctrlLogin implements ActionListener {
         this.modC = modC;
         this.frm = frm;
         this.frm.btnIngresar.addActionListener(this);
+        this.frm.btnRegistro.addActionListener(this);
     }
 
     public void iniciar() {
@@ -51,6 +54,13 @@ public class ctrlLogin implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
+        } else if (e.getSource() == frm.btnRegistro) {
+            // Abrir formulario de registro de pacientes con su controlador
+            Paciente pac = new Paciente();
+            ConsultasPaciente consPac = new ConsultasPaciente();
+            frmRegistroPacientes frmRegistro = new frmRegistroPacientes();
+            CtrlRegistroPaciente ctrlRegistro = new CtrlRegistroPaciente(pac, consPac, frmRegistro);
+            ctrlRegistro.iniciar();
         }
     }
 }
