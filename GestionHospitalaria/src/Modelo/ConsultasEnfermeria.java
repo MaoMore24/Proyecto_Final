@@ -20,9 +20,9 @@ public class ConsultasEnfermeria extends Conexion {
         Connection con = getConexion();
         ArrayList<String> pacientes = new ArrayList<>();
         
-        String sql = "SELECT p.id_paciente, u.nombre, u.apellido " +
+        String sql = "SELECT p.id, u.nombre, u.apellido " +
                      "FROM paciente p " +
-                     "INNER JOIN usuario u ON p.id_usuario = u.id_usuario " +
+                     "INNER JOIN usuario u ON p.id = u.id " +
                      "WHERE u.nombre LIKE ? OR u.apellido LIKE ?";
         
         try {
@@ -33,7 +33,7 @@ public class ConsultasEnfermeria extends Conexion {
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                int id = rs.getInt("id_paciente");
+                int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 pacientes.add(id + " - " + nombre + " " + apellido);

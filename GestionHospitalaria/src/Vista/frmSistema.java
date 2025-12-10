@@ -25,6 +25,7 @@ public class frmSistema extends javax.swing.JFrame {
         btnMedicos = new javax.swing.JButton();
         btnExpedientes = new javax.swing.JButton();
         btnAgenda = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,6 +171,26 @@ public class frmSistema extends javax.swing.JFrame {
         });
         jToolBar1.add(btnAgenda);
 
+        btnReportes.setBackground(new java.awt.Color(0, 102, 153));
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/report.png"))); // NOI18N
+        btnReportes.setText("Reportes");
+        btnReportes.setFocusable(false);
+        btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportes.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnReportes.setIconTextGap(8);
+        btnReportes.setMargin(new java.awt.Insets(6, 14, 3, 14));
+        btnReportes.setMaximumSize(new java.awt.Dimension(135, 60));
+        btnReportes.setMinimumSize(new java.awt.Dimension(60, 53));
+        btnReportes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnReportes);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logohospital.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -197,8 +218,8 @@ public class frmSistema extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addGap(0, 102, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -241,6 +262,10 @@ public class frmSistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgendaActionPerformed
 
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -270,6 +295,7 @@ public class frmSistema extends javax.swing.JFrame {
     public javax.swing.JButton btnInicio;
     public javax.swing.JButton btnMedicos;
     public javax.swing.JButton btnPacientes;
+    public javax.swing.JButton btnReportes;
     public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

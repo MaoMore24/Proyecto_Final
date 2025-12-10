@@ -74,4 +74,33 @@ public class ConsultasUsuario extends Conexion {
             }
         }
     }
+    /**
+     * Carga los roles en un ComboBox
+     * @param cmb ComboBox donde se cargarán los datos
+     */
+    public void cargarRoles(javax.swing.JComboBox cmb) {
+        java.sql.Statement st = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        // Excluimos rol 3 (Paciente) porque requieren datos adicionales (fecha nac, etc)
+        // que este formulario genérico no maneja.
+        String sql = "SELECT id, nombre FROM rol WHERE id <> 3 ORDER BY id";
+        
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            cmb.removeAllItems();
+            while (rs.next()) {
+                cmb.addItem(rs.getInt("id") + " - " + rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 }

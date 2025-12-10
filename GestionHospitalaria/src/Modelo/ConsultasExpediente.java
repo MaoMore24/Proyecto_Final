@@ -32,7 +32,7 @@ public class ConsultasExpediente extends Conexion {
             ps.setInt(2, diag.getIdMedico());
             ps.setString(3, diag.getPadecimientos());
             ps.setString(4, diag.getDiagnostico());
-            ps.setString(5, diag.getNotas());
+            ps.setString(5, diag.getNotas()); // En 'notas' guardamos el Examen Físico
             ps.execute();
             return true;
         } catch (SQLException e) {

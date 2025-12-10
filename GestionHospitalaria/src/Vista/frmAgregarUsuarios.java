@@ -50,7 +50,7 @@ public class frmAgregarUsuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cmbTipoUsuario = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel9.setBackground(new java.awt.Color(102, 204, 255));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

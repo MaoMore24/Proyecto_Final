@@ -77,19 +77,19 @@ public class CtrlAgendarCita implements ActionListener {
                 return;
             }
             
-            // Hora
-            String horaStr = JOptionPane.showInputDialog("Ingrese hora (HH:mm:ss):");
-            if (horaStr == null || horaStr.trim().isEmpty()) return;
+            // Hora desde la lista (JList btnHora)
+            String horaSeleccionada = frm.btnHora.getSelectedValue();
             
-            // Asegurar formato HH:mm:ss
-            if (horaStr.length() == 5) {
-                horaStr += ":00";
+            if (horaSeleccionada == null) {
+                JOptionPane.showMessageDialog(null, "Por favor seleccione una hora de la lista.");
+                return;
             }
             
             try {
-                mod.setHora(Time.valueOf(horaStr));
+                // Formato simple directo (HH:mm:ss) como en el ejemplo de la profesora
+                mod.setHora(java.sql.Time.valueOf(horaSeleccionada));
             } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(null, "Formato de hora incorrecto. Use HH:mm:ss (ej: 14:30:00)");
+                JOptionPane.showMessageDialog(null, "Error en formato de hora: " + horaSeleccionada);
                 return;
             }
             

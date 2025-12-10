@@ -33,12 +33,8 @@ public class CtrlRegistrarUsuario implements ActionListener {
     }
     
     private void cargarRoles() {
-        // Agregar los roles disponibles (excepto Paciente, que se registran aparte)
-        frm.cmbTipoUsuario.removeAllItems();
-        frm.cmbTipoUsuario.addItem("1 - Administrador");
-        frm.cmbTipoUsuario.addItem("2 - Medico");
-        frm.cmbTipoUsuario.addItem("4 - Enfermero");
-        frm.cmbTipoUsuario.addItem("5 - Laboratorio");
+        // Cargar roles desde la base de datos (excepto Pacientes, id 3, si así se desea filtrar)
+        modC.cargarRoles(frm.cmbTipoUsuario);
     }
     
     @Override

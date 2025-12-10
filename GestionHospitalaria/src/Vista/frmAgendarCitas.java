@@ -39,7 +39,7 @@ public class frmAgendarCitas extends javax.swing.JFrame {
         txtFecha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstHoras = new javax.swing.JList<>();
+        btnHora = new javax.swing.JList<>();
         btnAgendar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -47,7 +47,7 @@ public class frmAgendarCitas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(169, 234, 249));
 
@@ -118,12 +118,21 @@ public class frmAgendarCitas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
 
-        lstHoras.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM" };
+        btnHora.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(lstHoras);
+        btnHora.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnHoraAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(btnHora);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -295,6 +304,10 @@ public class frmAgendarCitas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMotivoAncestorAdded
 
+    private void btnHoraAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnHoraAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHoraAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -323,6 +336,7 @@ public class frmAgendarCitas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgendar;
     public javax.swing.JButton btnCancelar;
+    public javax.swing.JList<String> btnHora;
     public javax.swing.JComboBox<String> cmbEspecialidad;
     public javax.swing.JComboBox<String> cmbMedico;
     private javax.swing.JLabel jLabel1;
@@ -336,7 +350,6 @@ public class frmAgendarCitas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JList<String> lstHoras;
     public javax.swing.JTextField txtFecha;
     public javax.swing.JTextArea txtMotivo;
     // End of variables declaration//GEN-END:variables

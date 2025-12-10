@@ -94,8 +94,12 @@ public class CtrlExpediente implements ActionListener {
 
         boolean guardadoAlgo = false;
 
-        // 1. Guardar Diagnóstico
-        if (!vista.txtDiagnostico.getText().trim().isEmpty()) {
+        // 1. Guardar Diagnóstico (Historia Clínica)
+        // Se guarda si hay al menos un dato en cualquiera de los campos clínicos
+        if (!vista.txtDiagnostico.getText().trim().isEmpty() || 
+            !vista.txtPadecimientos.getText().trim().isEmpty() || 
+            !vista.txtExamenFisico.getText().trim().isEmpty()) {
+            
             Diagnostico diag = new Diagnostico();
             diag.setIdExpediente(idExpedienteSeleccionado);
             diag.setIdMedico(medicoActual.getId());

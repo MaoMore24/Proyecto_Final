@@ -16,25 +16,26 @@ public class ConsultasMedico extends ConsultasUsuario {
         Connection con = getConexion();
         
         try {
-            con.setAutoCommit(false);
-            
             // 1. Insertar Usuario
             String sqlUsuario = "INSERT INTO usuario (username, password, nombre, apellido, email, id_rol) VALUES (?, ?, ?, ?, ?, ?)";
+            // Necesitamos el ID generado para la tabla medico
             ps = con.prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, med.getUsername());
-            ps.setString(2, med.getPassword()); // Sin encriptación
+            ps.setString(2, med.getPassword());
             ps.setString(3, med.getNombre());
             ps.setString(4, med.getApellido());
             ps.setString(5, med.getEmail());
             ps.setInt(6, 2); // Rol 2 = Medico
             
-            if (ps.executeUpdate() == 0) throw new SQLException("No se pudo crear usuario");
+            ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
             int idUsuario = -1;
-            if (rs.next()) idUsuario = rs.getInt(1);
+            if (rs.next()) {
+                idUsuario = rs.getInt(1);
+            }
             
-            // 2. Insertar Médico
+            // 2. Insertar Médico usando el ID del usuario
             String sqlMedico = "INSERT INTO medico (id, id_especialidad, cedula_profesional) VALUES (?, ?, ?)";
             ps = con.prepareStatement(sqlMedico);
             ps.setInt(1, idUsuario);
@@ -42,15 +43,17 @@ public class ConsultasMedico extends ConsultasUsuario {
             ps.setString(3, med.getCedula());
             ps.execute();
             
-            con.commit();
             return true;
             
         } catch (SQLException e) {
-            System.err.println("Error Registrar Medico: " + e);
-            try { con.rollback(); } catch (SQLException ex) {}
+            System.err.println(e);
             return false;
         } finally {
-            try { if(con!=null) { con.setAutoCommit(true); con.close(); } } catch (SQLException e) {}
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
         }
     }
     
@@ -60,8 +63,6 @@ public class ConsultasMedico extends ConsultasUsuario {
         Connection con = getConexion();
         
         try {
-            con.setAutoCommit(false);
-            
             // Actualizar Usuario
             String sqlUsuario = "UPDATE usuario SET username=?, nombre=?, apellido=?, email=? WHERE id=?";
             ps = con.prepareStatement(sqlUsuario);
@@ -78,17 +79,19 @@ public class ConsultasMedico extends ConsultasUsuario {
             ps.setInt(1, med.getIdEspecialidad());
             ps.setString(2, med.getCedula());
             ps.setInt(3, med.getId());
-            ps.executeUpdate();
+            ps.executeUpdate(); // Usamos executeUpdate consistente con el ejemplo anterior si fuera necesario, o execute()
             
-            con.commit();
             return true;
             
         } catch (SQLException e) {
-            System.err.println("Error Modificar: " + e);
-            try { con.rollback(); } catch (SQLException ex) {}
+            System.err.println(e);
             return false;
         } finally {
-            try { if(con!=null) { con.setAutoCommit(true); con.close(); } } catch (SQLException e) {}
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
         }
     }
     
