@@ -28,6 +28,8 @@ public class frmMedicos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         lblTitulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNombre = new javax.swing.JLabel();
@@ -42,6 +44,7 @@ public class frmMedicos extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         btnGuardar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -59,9 +62,21 @@ public class frmMedicos extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtMedicos = new javax.swing.JTable();
-        txtId = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtHorarios = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,7 +108,7 @@ public class frmMedicos extends javax.swing.JFrame {
         btnGuardar.setText("Guardar");
         btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 40));
+        btnGuardar.setMaximumSize(new java.awt.Dimension(60, 40));
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,12 +117,26 @@ public class frmMedicos extends javax.swing.JFrame {
         });
         jToolBar1.add(btnGuardar);
 
+        btnBuscar.setBackground(new java.awt.Color(0, 102, 204));
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setFocusable(false);
+        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setLabel("Buscar");
+        btnBuscar.setMaximumSize(new java.awt.Dimension(60, 40));
+        btnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnBuscar);
+
         btnModificar.setBackground(new java.awt.Color(0, 102, 204));
         btnModificar.setForeground(new java.awt.Color(255, 255, 255));
         btnModificar.setText("Modificar");
         btnModificar.setFocusable(false);
         btnModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnModificar.setMaximumSize(new java.awt.Dimension(80, 40));
+        btnModificar.setMaximumSize(new java.awt.Dimension(60, 40));
         btnModificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +150,7 @@ public class frmMedicos extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 40));
+        btnEliminar.setMaximumSize(new java.awt.Dimension(60, 40));
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +164,7 @@ public class frmMedicos extends javax.swing.JFrame {
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setFocusable(false);
         btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLimpiar.setMaximumSize(new java.awt.Dimension(80, 40));
+        btnLimpiar.setMaximumSize(new java.awt.Dimension(60, 40));
         btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +297,9 @@ public class frmMedicos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblHorario)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -298,7 +329,7 @@ public class frmMedicos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,9 +342,7 @@ public class frmMedicos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jtMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        jtHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -321,71 +350,52 @@ public class frmMedicos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Especialidad", "Código"
+                "Código", "Día", "Hora Inicio", "Hora Final"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jtMedicos.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jtMedicosAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane1.setViewportView(jtMedicos);
+        ));
+        jScrollPane2.setViewportView(jtHorarios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 65, Short.MAX_VALUE))
         );
-
-        txtId.setEditable(false);
-        txtId.setBorder(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(62, Short.MAX_VALUE))))
         );
 
         pack();
@@ -423,10 +433,6 @@ public class frmMedicos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarHorarioActionPerformed
 
-    private void jtMedicosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jtMedicosAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtMedicosAncestorAdded
-
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
@@ -434,6 +440,10 @@ public class frmMedicos extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,6 +472,7 @@ public class frmMedicos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregarHorario;
+    public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
@@ -474,8 +485,10 @@ public class frmMedicos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
-    public javax.swing.JTable jtMedicos;
+    public javax.swing.JTable jtHorarios;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblDia;
@@ -491,7 +504,6 @@ public class frmMedicos extends javax.swing.JFrame {
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtHoraFin;
     public javax.swing.JTextField txtHoraInicio;
-    public javax.swing.JTextField txtId;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUsuario;

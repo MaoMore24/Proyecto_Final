@@ -16,6 +16,7 @@ public class CtrlMedico implements ActionListener {
     private Medico mod;
     private ConsultasMedico modC;
     private frmMedicos frm;
+    private int idMedicoSeleccionado = -1; // ID temporal para manejar ediciones sin txtId
     
     public CtrlMedico(Medico mod, ConsultasMedico modC, frmMedicos frm) {
         this.mod = mod;
@@ -27,14 +28,7 @@ public class CtrlMedico implements ActionListener {
         this.frm.btnEliminar.addActionListener(this);
         this.frm.btnLimpiar.addActionListener(this);
         this.frm.btnAgregarHorario.addActionListener(this);
-        
-        // Listener para la tabla (seleccionar fila)
-        this.frm.jtMedicos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                seleccionarMedico();
-            }
-        });
+        this.frm.btnBuscar.addActionListener(this);
     }
     
     public void iniciar() {
@@ -43,60 +37,55 @@ public class CtrlMedico implements ActionListener {
         frm.setVisible(true);
         
         modC.cargarEspecialidades(frm.cmbEspecialidad);
-        listar();
-    }
-    
-    private void listar() {
-        ArrayList<Medico> lista = modC.listarMedicos();
-        DefaultTableModel modelo = (DefaultTableModel) frm.jtMedicos.getModel();
-        modelo.setRowCount(0); // Limpiar tabla
-        
-        // Asegurar que la tabla tenga las columnas correctas
-        if (modelo.getColumnCount() == 0) {
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Especialidad");
-            modelo.addColumn("Cédula");
-        }
-        
-        for (Medico m : lista) {
-            Object[] fila = {
-                m.getId(),
-                m.getNombre(),
-                m.getApellido(),
-                m.getNombreEspecialidad(),
-                m.getCedula()
-            };
-            modelo.addRow(fila);
-        }
-    }
-    
-    private void seleccionarMedico() {
-        int fila = frm.jtMedicos.getSelectedRow();
-        if (fila >= 0) {
-            frm.txtId.setText(frm.jtMedicos.getValueAt(fila, 0).toString());
-            frm.txtNombre.setText(frm.jtMedicos.getValueAt(fila, 1).toString());
-            frm.txtApellido.setText(frm.jtMedicos.getValueAt(fila, 2).toString());
-            // Nota: Usuario y Password no se muestran en tabla por seguridad
-            // Cédula está en la columna 4
-            frm.txtCedula.setText(frm.jtMedicos.getValueAt(fila, 4).toString());
-        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        // --- BUSCAR MÉDICO ---
+        if (e.getSource() == frm.btnBuscar) {
+            String cedula = frm.txtCedula.getText().trim();
+            if (cedula.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ingrese el Código Profesional (Cédula) para buscar.");
+                return;
+            }
+            
+            Medico encontrado = modC.buscarPorCedula(cedula);
+            if (encontrado != null) {
+                idMedicoSeleccionado = encontrado.getId();
+                frm.txtUsuario.setText(encontrado.getUsername());
+                frm.txtPassword.setText(encontrado.getPassword()); // Cuidado: passwords en texto plano
+                frm.txtNombre.setText(encontrado.getNombre());
+                frm.txtApellido.setText(encontrado.getApellido());
+                frm.txtEmail.setText(encontrado.getEmail());
+                frm.txtCedula.setText(encontrado.getCedula());
+                
+                // Seleccionar especialidad en el combo
+                // Asumimos que el combo tiene items "ID - Nombre"
+                for (int i = 0; i < frm.cmbEspecialidad.getItemCount(); i++) {
+                    String item = frm.cmbEspecialidad.getItemAt(i);
+                    if (item.startsWith(encontrado.getIdEspecialidad() + " -")) {
+                        frm.cmbEspecialidad.setSelectedIndex(i);
+                        break;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Médico encontrado.");
+                listarHorarios(); // Cargar horarios
+            } else {
+                JOptionPane.showMessageDialog(null, "Médico no encontrado.");
+                limpiar();
+            }
+        }
+        
+        // --- GUARDAR ---
         if (e.getSource() == frm.btnGuardar) {
             mod.setUsername(frm.txtUsuario.getText());
-            // Usamos getPassword() por seguridad (requiere que el componente sea JPasswordField)
             mod.setPassword(new String(frm.txtPassword.getPassword()));
             mod.setNombre(frm.txtNombre.getText());
             mod.setApellido(frm.txtApellido.getText());
             mod.setEmail(frm.txtEmail.getText());
             mod.setCedula(frm.txtCedula.getText());
             
-            // Obtener ID especialidad del string "1 - Cardiologia"
             try {
                 String esp = frm.cmbEspecialidad.getSelectedItem().toString();
                 int idEsp = Integer.parseInt(esp.split(" - ")[0]);
@@ -108,20 +97,28 @@ public class CtrlMedico implements ActionListener {
             
             if (modC.registrar(mod)) {
                 JOptionPane.showMessageDialog(null, "Médico Guardado");
-                listar();
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al guardar");
             }
         }
         
+        // --- MODIFICAR ---
         if (e.getSource() == frm.btnModificar) {
-            mod.setId(Integer.parseInt(frm.txtId.getText()));
+            if (idMedicoSeleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "Primero busque un médico para modificar.");
+                return;
+            }
+            
+            mod.setId(idMedicoSeleccionado);
             mod.setUsername(frm.txtUsuario.getText());
-            mod.setNombre(frm.txtNombre.getText());
+            mod.setNombre(frm.txtNombre.getText()); // Posiblemente falta setPassword si se permite cambiar
             mod.setApellido(frm.txtApellido.getText());
             mod.setEmail(frm.txtEmail.getText());
             mod.setCedula(frm.txtCedula.getText());
+            // Si desea permitir cambio de password:
+            // mod.setPassword(new String(frm.txtPassword.getPassword()));
+            
              // Obtener ID especialidad
             try {
                 String esp = frm.cmbEspecialidad.getSelectedItem().toString();
@@ -134,52 +131,86 @@ public class CtrlMedico implements ActionListener {
             
             if (modC.modificar(mod)) {
                 JOptionPane.showMessageDialog(null, "Médico Modificado");
-                listar();
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar");
             }
         }
         
+        // --- ELIMINAR ---
         if (e.getSource() == frm.btnEliminar) {
-            if (frm.txtId.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Seleccione un médico para eliminar");
+            if (idMedicoSeleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "Primero busque un médico para eliminar");
                 return;
             }
-            mod.setId(Integer.parseInt(frm.txtId.getText()));
-            if (modC.eliminar(mod)) {
-                JOptionPane.showMessageDialog(null, "Médico Eliminado");
-                listar();
-                limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar");
+            mod.setId(idMedicoSeleccionado);
+            
+            int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar a este médico?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                if (modC.eliminar(mod)) {
+                    JOptionPane.showMessageDialog(null, "Médico Eliminado");
+                    limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar");
+                }
             }
         }
         
+        // --- LIMPIAR ---
         if (e.getSource() == frm.btnLimpiar) {
             limpiar();
         }
         
+        // --- AGREGAR HORARIO ---
         if (e.getSource() == frm.btnAgregarHorario) {
-            if (frm.txtId.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Seleccione un médico primero (desde la tabla)");
+            if (idMedicoSeleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "Busque y seleccione un médico primero.");
                 return;
             }
-            int idMedico = Integer.parseInt(frm.txtId.getText());
             String dia = frm.cmbDia.getSelectedItem().toString();
             String inicio = frm.txtHoraInicio.getText();
             String fin = frm.txtHoraFin.getText();
             
-            if (modC.agregarHorario(idMedico, dia, inicio, fin)) {
+            if (inicio.isEmpty() || fin.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ingrese hora inicio y fin.");
+                return;
+            }
+            
+            if (modC.agregarHorario(idMedicoSeleccionado, dia, inicio, fin)) {
                 JOptionPane.showMessageDialog(null, "Horario Agregado");
+                listarHorarios(); // Refrescar tabla
+                frm.txtHoraInicio.setText("");
+                frm.txtHoraFin.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al agregar horario");
             }
         }
     }
     
+    // Método para llenar la tabla de horarios
+    private void listarHorarios() {
+        if (idMedicoSeleccionado == -1) return;
+        
+        ArrayList<String[]> lista = modC.listarHorarios(idMedicoSeleccionado);
+        DefaultTableModel modelo = (DefaultTableModel) frm.jtHorarios.getModel();
+        modelo.setRowCount(0);
+        
+        // Configurar columnas si no existen
+        if (modelo.getColumnCount() == 0) {
+            modelo.addColumn("ID");
+            modelo.addColumn("Día");
+            modelo.addColumn("Inicio");
+            modelo.addColumn("Fin");
+        }
+        
+        for (String[] fila : lista) {
+            modelo.addRow(fila);
+        }
+    }
+    
     public void limpiar() {
-        frm.txtId.setText(null);
+        idMedicoSeleccionado = -1;
+        // frm.txtId.setText(null); // Eliminado
         frm.txtUsuario.setText(null);
         frm.txtPassword.setText(null);
         frm.txtNombre.setText(null);
@@ -188,5 +219,11 @@ public class CtrlMedico implements ActionListener {
         frm.txtCedula.setText(null);
         frm.txtHoraInicio.setText(null);
         frm.txtHoraFin.setText(null);
+        
+        // Limpiar tabla horarios
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) frm.jtHorarios.getModel();
+            modelo.setRowCount(0);
+        } catch (Exception e) {}
     }
 }

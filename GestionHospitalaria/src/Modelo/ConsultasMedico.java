@@ -131,9 +131,6 @@ public class ConsultasMedico extends ConsultasUsuario {
             ResultSet rs = st.executeQuery(sql);
             cmb.removeAllItems();
             while(rs.next()) {
-                // Guardamos el objeto o un string formateado "ID - Nombre"
-                // Para simplificar, guardaremos el nombre y manejaremos el ID buscando o usando una clase auxiliar Item
-                // Aquí asumiremos que el combo guarda Strings y buscaremos el ID luego, o mejor:
                 // Creamos una clase interna o usamos un truco de String
                 cmb.addItem(rs.getInt("id") + " - " + rs.getString("nombre"));
             }
@@ -186,7 +183,63 @@ public class ConsultasMedico extends ConsultasUsuario {
             return true;
         } catch (SQLException e) {
             System.err.println("Error Horario: " + e);
-            return false;
         }
+        return false;
+    }
+    
+    // Método para buscar médico por cédula (código profesional)
+    public Medico buscarPorCedula(String cedula) {
+        Medico med = null;
+        Connection con = getConexion();
+        String sql = "SELECT u.*, m.id_especialidad, m.cedula_profesional FROM usuario u " +
+                     "INNER JOIN medico m ON u.id = m.id WHERE m.cedula_profesional = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cedula);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                med = new Medico();
+                med.setId(rs.getInt("id"));
+                med.setUsername(rs.getString("username"));
+                med.setPassword(rs.getString("password"));
+                med.setNombre(rs.getString("nombre"));
+                med.setApellido(rs.getString("apellido"));
+                med.setEmail(rs.getString("email"));
+                med.setCedula(rs.getString("cedula_profesional"));
+                med.setIdEspecialidad(rs.getInt("id_especialidad"));
+                med.setId_rol(rs.getInt("id_rol")); // Rol 2 siempre
+            }
+        } catch (SQLException e) {
+            System.err.println("Error buscarPorCedula: " + e);
+        }
+        return med;
+    }
+
+    // Método para listar horarios de un médico
+    public ArrayList<String[]> listarHorarios(int idMedico) {
+        ArrayList<String[]> lista = new ArrayList<>();
+        Connection con = getConexion();
+        String sql = "SELECT id, dia_semana, hora_inicio, hora_fin FROM horario_medico WHERE id_medico = ? " +
+                     "ORDER BY FIELD(dia_semana, 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo')";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMedico);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                String[] fila = {
+                    String.valueOf(rs.getInt("id")), // ID Horario
+                    rs.getString("dia_semana"),
+                    rs.getString("hora_inicio"),
+                    rs.getString("hora_fin")
+                };
+                lista.add(fila);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error listarHorarios: " + e);
+        }
+        return lista;
     }
 }

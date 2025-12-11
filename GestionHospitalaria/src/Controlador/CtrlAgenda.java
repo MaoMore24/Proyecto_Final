@@ -23,13 +23,47 @@ public class CtrlAgenda implements ActionListener {
         this.vista = vista;
         this.medico = medico;
         this.vista.btnFiltrar.addActionListener(this);
+        
+        // Menú contextual para cambiar estado (Clic derecho)
+        javax.swing.JPopupMenu popup = new javax.swing.JPopupMenu();
+        javax.swing.JMenuItem itemRealizada = new javax.swing.JMenuItem("Marcar como Realizada");
+        javax.swing.JMenuItem itemCancelada = new javax.swing.JMenuItem("Marcar como Cancelada");
+        javax.swing.JMenuItem itemAusente = new javax.swing.JMenuItem("Marcar como Ausente");
+        
+        popup.add(itemRealizada);
+        popup.add(itemCancelada);
+        popup.add(itemAusente);
+        
+        // Listeners para el menú
+        itemRealizada.addActionListener(e -> cambiarEstado("Realizada"));
+        itemCancelada.addActionListener(e -> cambiarEstado("Cancelada"));
+        itemAusente.addActionListener(e -> cambiarEstado("Ausente"));
+        
+        vista.tblAgenda.setComponentPopupMenu(popup);
+    }
+    
+    private void cambiarEstado(String nuevoEstado) {
+        int fila = vista.tblAgenda.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una cita.");
+            return;
+        }
+        
+        // Asumimos que la columna 0 es el ID (agregada en cargarAgenda)
+        int idCita = Integer.parseInt(vista.tblAgenda.getValueAt(fila, 0).toString());
+        
+        if (consultas.actualizarEstadoCita(idCita, nuevoEstado)) {
+            JOptionPane.showMessageDialog(null, "Estado actualizado a: " + nuevoEstado);
+            cargarAgenda(); // Recargar tabla
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar estado.");
+        }
     }
 
     public void iniciar() {
         vista.setTitle("Agenda - Dr. " + medico.getNombre() + " " + medico.getApellido());
         vista.setLocationRelativeTo(null);
         
-        // Set current date by default (dd-MM-yyyy para ser consistente con el resto)
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         vista.txtFecha.setText(sdf.format(new Date()));
         
@@ -53,18 +87,23 @@ public class CtrlAgenda implements ActionListener {
         
         // Asegurar columnas
         if (model.getColumnCount() == 0) {
+            model.addColumn("ID");
             model.addColumn("Hora");
             model.addColumn("Paciente");
             model.addColumn("Motivo");
             model.addColumn("Estado");
+            
+            // Ocultar ID visualmente si se quiere (opcional), aquí lo dejamos visible para debug
+             vista.tblAgenda.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
         
         ArrayList<Cita> citas = consultas.listarAgenda(medico.getId(), fechaDate);
         
         for (Cita c : citas) {
             model.addRow(new Object[]{
+                c.getId(),
                 c.getHora(),
-                c.getNombreMedico(), // Aquí guardamos el nombre del paciente temporalmente en el modelo
+                c.getNombreMedico(), 
                 c.getMotivo(),
                 c.getEstado()
             });

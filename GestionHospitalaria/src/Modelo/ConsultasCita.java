@@ -143,7 +143,7 @@ public class ConsultasCita extends ConsultasUsuario {
         ArrayList<Cita> lista = new ArrayList<>();
         Connection con = getConexion();
         // Filter by DATE part of fecha_hora
-        String sql = "SELECT c.fecha_hora, u.nombre, u.apellido, c.motivo, c.estado " +
+        String sql = "SELECT c.id, c.fecha_hora, u.nombre, u.apellido, c.motivo, c.estado " +
                      "FROM cita c " +
                      "JOIN usuario u ON c.id_paciente = u.id " +
                      "WHERE c.id_medico = ? AND DATE(c.fecha_hora) = ?";
@@ -156,11 +156,12 @@ public class ConsultasCita extends ConsultasUsuario {
             
             while(rs.next()) {
                 Cita c = new Cita();
+                c.setId(rs.getInt("id")); // Guardamos ID cita
                 java.sql.Timestamp ts = rs.getTimestamp("fecha_hora");
                 c.setFecha(new java.sql.Date(ts.getTime()));
                 c.setHora(new java.sql.Time(ts.getTime()));
                 
-                c.setNombreMedico(rs.getString("nombre") + " " + rs.getString("apellido")); 
+                c.setNombreMedico(rs.getString("nombre") + " " + rs.getString("apellido")); // Nombre paciente
                 c.setMotivo(rs.getString("motivo"));
                 c.setEstado(rs.getString("estado"));
                 lista.add(c);
@@ -169,5 +170,21 @@ public class ConsultasCita extends ConsultasUsuario {
             System.err.println(e);
         }
         return lista;
+    }
+    
+    // Método para actualizar estado de la Cita
+    public boolean actualizarEstadoCita(int idCita, String estado) {
+        Connection con = getConexion();
+        String sql = "UPDATE cita SET estado = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, estado);
+            ps.setInt(2, idCita);
+            ps.execute();
+            return true;
+        } catch(SQLException e) {
+            System.err.println("Error actualizarEstado: " + e);
+            return false;
+        }
     }
 }

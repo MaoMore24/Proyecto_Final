@@ -19,7 +19,7 @@ public class frmSistema extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
-        btnInicio = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btnPacientes = new javax.swing.JButton();
         btnCitas = new javax.swing.JButton();
         btnMedicos = new javax.swing.JButton();
@@ -44,28 +44,18 @@ public class frmSistema extends javax.swing.JFrame {
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
         jToolBar1.setToolTipText("");
+        jToolBar1.setAlignmentY(3.0F);
+        jToolBar1.setMargin(new java.awt.Insets(10, 0, 0, 0));
         jToolBar1.setName(""); // NOI18N
 
-        btnInicio.setBackground(new java.awt.Color(0, 102, 153));
-        btnInicio.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        btnInicio.setForeground(new java.awt.Color(255, 255, 255));
-        btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/home (2).png"))); // NOI18N
-        btnInicio.setText("Inicio");
-        btnInicio.setFocusable(false);
-        btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnInicio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnInicio.setIconTextGap(8);
-        btnInicio.setMargin(new java.awt.Insets(6, 14, 3, 14));
-        btnInicio.setMaximumSize(new java.awt.Dimension(135, 60));
-        btnInicio.setMinimumSize(new java.awt.Dimension(60, 53));
-        btnInicio.setPreferredSize(new java.awt.Dimension(60, 53));
-        btnInicio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInicioActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnInicio);
+        jButton1.setBackground(new java.awt.Color(0, 102, 153));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setEnabled(false);
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(100, 30));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
 
         btnPacientes.setBackground(new java.awt.Color(0, 102, 153));
         btnPacientes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
@@ -219,7 +209,7 @@ public class frmSistema extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel2)
                 .addGap(0, 102, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,10 +227,6 @@ public class frmSistema extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
         // TODO add your handling code here:
@@ -292,11 +278,11 @@ public class frmSistema extends javax.swing.JFrame {
     public javax.swing.JButton btnAgenda;
     public javax.swing.JButton btnCitas;
     public javax.swing.JButton btnExpedientes;
-    public javax.swing.JButton btnInicio;
     public javax.swing.JButton btnMedicos;
     public javax.swing.JButton btnPacientes;
     public javax.swing.JButton btnReportes;
     public javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

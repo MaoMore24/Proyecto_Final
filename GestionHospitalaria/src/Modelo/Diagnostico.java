@@ -6,6 +6,7 @@ public class Diagnostico {
     private int id;
     private int idExpediente;
     private int idMedico;
+    private int idPaciente;
     private String padecimientos;
     private String diagnostico;
     private String notas;
@@ -17,6 +18,8 @@ public class Diagnostico {
     public void setIdExpediente(int idExpediente) { this.idExpediente = idExpediente; }
     public int getIdMedico() { return idMedico; }
     public void setIdMedico(int idMedico) { this.idMedico = idMedico; }
+    public int getIdPaciente() { return idPaciente; }
+    public void setIdPaciente(int idPaciente) { this.idPaciente = idPaciente; }
     public String getPadecimientos() { return padecimientos; }
     public void setPadecimientos(String padecimientos) { this.padecimientos = padecimientos; }
     public String getDiagnostico() { return diagnostico; }

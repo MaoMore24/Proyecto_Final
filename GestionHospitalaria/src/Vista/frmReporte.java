@@ -70,9 +70,6 @@ public class frmReporte extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(btnFiltrar))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -80,7 +77,10 @@ public class frmReporte extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(txtFechaFin))))
+                            .addComponent(txtFechaFin)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnFiltrar)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -94,9 +94,9 @@ public class frmReporte extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnFiltrar)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -200,7 +200,7 @@ public class frmReporte extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(btnActualizar)
-                .addGap(28, 28, 28)
+                .addGap(43, 43, 43)
                 .addComponent(btnCerrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

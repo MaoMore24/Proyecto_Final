@@ -42,10 +42,10 @@ public class frmGestionHorarios extends javax.swing.JFrame {
         txtHoraInicio = new javax.swing.JTextField();
         txtHoraFin = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
-        btnGuardar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión Horarios");
@@ -76,78 +76,75 @@ public class frmGestionHorarios extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setOpaque(false);
 
-        btnGuardar.setBackground(new java.awt.Color(0, 102, 204));
-        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("Guardar");
-        btnGuardar.setFocusable(false);
-        btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnGuardar.setIconTextGap(8);
-        btnGuardar.setMaximumSize(new java.awt.Dimension(70, 24));
-        btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnGuardar);
+        jButton1.setBackground(new java.awt.Color(0, 102, 204));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Guardar");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setIconTextGap(8);
+        jButton1.setMaximumSize(new java.awt.Dimension(70, 24));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
 
-        btnModificar.setBackground(new java.awt.Color(0, 102, 204));
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("Modificar");
-        btnModificar.setFocusable(false);
-        btnModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnModificar.setIconTextGap(8);
-        btnModificar.setMaximumSize(new java.awt.Dimension(70, 24));
-        btnModificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnModificar);
+        jButton2.setBackground(new java.awt.Color(0, 102, 204));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Modificar");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setIconTextGap(8);
+        jButton2.setMaximumSize(new java.awt.Dimension(70, 24));
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
 
-        btnEliminar.setBackground(new java.awt.Color(0, 102, 204));
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setFocusable(false);
-        btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEliminar.setIconTextGap(8);
-        btnEliminar.setMaximumSize(new java.awt.Dimension(70, 24));
-        btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnEliminar);
+        jButton3.setBackground(new java.awt.Color(0, 102, 204));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Eliminar");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setIconTextGap(8);
+        jButton3.setMaximumSize(new java.awt.Dimension(70, 24));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton3);
 
-        btnLimpiar.setBackground(new java.awt.Color(0, 102, 204));
-        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.setFocusable(false);
-        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLimpiar.setIconTextGap(8);
-        btnLimpiar.setMaximumSize(new java.awt.Dimension(70, 24));
-        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnLimpiar);
+        jButton4.setBackground(new java.awt.Color(0, 102, 204));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Limpiar");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setIconTextGap(8);
+        jButton4.setMaximumSize(new java.awt.Dimension(70, 24));
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(84, 84, 84)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscar))
-                                    .addComponent(txtIdMedico)
-                                    .addComponent(cmbDia, 0, 155, Short.MAX_VALUE)
-                                    .addComponent(txtHoraInicio)
-                                    .addComponent(txtHoraFin)))
-                            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 100, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar))
+                            .addComponent(txtIdMedico)
+                            .addComponent(cmbDia, 0, 155, Short.MAX_VALUE)
+                            .addComponent(txtHoraInicio)
+                            .addComponent(txtHoraFin)))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,10 +219,10 @@ public class frmGestionHorarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
     public javax.swing.JComboBox<String> cmbDia;
-    public javax.swing.JButton btnGuardar;
-    public javax.swing.JButton btnModificar;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

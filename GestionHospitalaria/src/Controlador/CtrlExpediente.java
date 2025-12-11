@@ -78,7 +78,14 @@ public class CtrlExpediente implements ActionListener {
             // Obtener ID Expediente
             idExpedienteSeleccionado = consultas.obtenerIdExpediente(idPacienteSeleccionado);
             if (idExpedienteSeleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Error: El paciente no tiene un expediente creado.");
+                // Intentar crear expediente automáticamente
+                int nuevoId = consultas.crearExpediente(idPacienteSeleccionado);
+                if (nuevoId != -1) {
+                    idExpedienteSeleccionado = nuevoId;
+                    JOptionPane.showMessageDialog(null, "Se ha inicializado un nuevo expediente para el paciente.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error crítico: No se pudo obtener ni crear el expediente del paciente.");
+                }
             }
             
         } catch (Exception ex) {
@@ -103,6 +110,7 @@ public class CtrlExpediente implements ActionListener {
             Diagnostico diag = new Diagnostico();
             diag.setIdExpediente(idExpedienteSeleccionado);
             diag.setIdMedico(medicoActual.getId());
+            diag.setIdPaciente(idPacienteSeleccionado); // Nuevo campo requerido
             diag.setPadecimientos(vista.txtPadecimientos.getText());
             diag.setDiagnostico(vista.txtDiagnostico.getText());
             diag.setNotas(vista.txtExamenFisico.getText()); // Usamos Examen Físico como notas
