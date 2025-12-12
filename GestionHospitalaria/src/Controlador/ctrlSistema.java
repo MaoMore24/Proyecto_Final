@@ -18,7 +18,6 @@ import Vista.frmAgregarUsuarios;
 import Vista.frmEnfermeria;
 import Vista.frmLaboratorio;
 import Vista.frmReporte;
-import Vista.frmHistorialPaciente;
 import Vista.frmMedicos;
 import Vista.frmAgenda;
 import Vista.frmRegistroPacientes;
@@ -27,9 +26,6 @@ import java.awt.event.ActionListener;
 import Modelo.Paciente;
 import Modelo.ConsultasPaciente;
 import Modelo.ConsultasExpediente;
-import Controlador.CtrlExpediente;
-import Controlador.CtrlRegistroPaciente;
-import Controlador.CtrlHistorialPaciente;
 import Vista.frmExpediente;
 
 
@@ -172,10 +168,7 @@ public class ctrlSistema implements ActionListener {
         }
         
         if (e.getSource() == frm.btnAgenda) {
-            // Abrir agenda del médico
-            // Usamos modelo Cita y ConsultasCita, pero la vista específica de Agenda
-            // Usamos modelo ConsultasCita y la vista específica de Agenda
-            // Cita mod = new Cita(); // No es necesario en este constructor
+            
             ConsultasCita modC = new ConsultasCita();
             frmAgenda vista = new frmAgenda();
             
@@ -190,7 +183,7 @@ public class ctrlSistema implements ActionListener {
             String rol = usuario.getNombre_rol();
             
             if ("Enfermero (a)".equalsIgnoreCase(rol)) {
-                // Patrón universitario MVC
+                
                 Enfermeria modelo = new Enfermeria();
                 ConsultasEnfermeria consultas = new ConsultasEnfermeria();
                 frmEnfermeria vista = new frmEnfermeria();
@@ -199,7 +192,7 @@ public class ctrlSistema implements ActionListener {
                 vista.setVisible(true);
             } 
             else if ("Personal de Laboratorio".equalsIgnoreCase(rol)) {
-                // Patrón universitario MVC
+                
                 ResultadoLaboratorio modelo = new ResultadoLaboratorio();
                 ConsultasLaboratorio consultas = new ConsultasLaboratorio();
                 frmLaboratorio vista = new frmLaboratorio();
@@ -218,7 +211,7 @@ public class ctrlSistema implements ActionListener {
             }
             else if ("Administrador (a)".equalsIgnoreCase(rol)) {
                 // ✅ ADMIN: Puede ver expedientes (modo lectura o edición completa según se defina)
-                // Por ahora reutilizamos el mismo controlador
+                
                 ConsultasExpediente consExp = new ConsultasExpediente();
                 frmExpediente frmExp = new frmExpediente();
                 CtrlExpediente ctrlExp = new CtrlExpediente(consExp, frmExp, usuario);
@@ -228,7 +221,7 @@ public class ctrlSistema implements ActionListener {
         }
         
         if (e.getSource() == frm.btnReportes) {
-            // Patrón universitario MVC - Abrir módulo de reportes
+            
             Reporte modelo = new Reporte();
             ConsultasReporte consultas = new ConsultasReporte();
             frmReporte vista = new frmReporte();
