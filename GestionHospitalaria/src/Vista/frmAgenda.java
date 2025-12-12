@@ -94,7 +94,7 @@ public class frmAgenda extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Hora", "Paciente", "Motivo", "Estado"
+                "Id", "Hora", "Paciente", "Estado"
             }
         ));
         tblAgenda.addAncestorListener(new javax.swing.event.AncestorListener() {

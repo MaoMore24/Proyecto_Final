@@ -85,17 +85,14 @@ public class CtrlAgenda implements ActionListener {
         DefaultTableModel model = (DefaultTableModel) vista.tblAgenda.getModel();
         model.setRowCount(0); // Clear table
         
-        // Asegurar columnas
-        if (model.getColumnCount() == 0) {
-            model.addColumn("ID");
-            model.addColumn("Hora");
-            model.addColumn("Paciente");
-            model.addColumn("Motivo");
-            model.addColumn("Estado");
+        // Definir columnas siempre para asegurar concordancia con los datos
+        String[] columnas = {"ID", "Hora", "Paciente", "Motivo", "Estado"};
+        model.setColumnIdentifiers(columnas);
             
-            // Ocultar ID visualmente si se quiere (opcional), aquí lo dejamos visible para debug
-             vista.tblAgenda.getColumnModel().getColumn(0).setPreferredWidth(30);
-        }
+        // Ocultar ID visualmente pero mantenerlo en el modelo
+        vista.tblAgenda.getColumnModel().getColumn(0).setMinWidth(0);
+        vista.tblAgenda.getColumnModel().getColumn(0).setMaxWidth(0);
+        vista.tblAgenda.getColumnModel().getColumn(0).setWidth(0);
         
         ArrayList<Cita> citas = consultas.listarAgenda(medico.getId(), fechaDate);
         

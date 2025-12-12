@@ -43,7 +43,8 @@ public class ConsultasPaciente extends ConsultasUsuario {
             ps.execute();
             
             // 3. Crear Expediente Médico inicial
-            String sqlExpediente = "INSERT INTO expediente (id_paciente, fecha_creacion) VALUES (?, NOW())";
+            // 3. Crear Expediente Médico inicial
+            String sqlExpediente = "INSERT INTO expediente (id_paciente) VALUES (?)";
             ps = con.prepareStatement(sqlExpediente);
             ps.setInt(1, idUsuario);
             ps.execute();

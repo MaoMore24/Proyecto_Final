@@ -59,18 +59,18 @@ public class ConsultasExpediente extends Conexion {
                 nextId = rsID.getInt(1) + 1;
             }
             
-            // 2. Insertar usando el ID generado y SIN id_paciente (que no existe)
-            // Usamos la columna 'notas' por defecto, si falla probaremos 'examen_fisico' en un catch anidado, 
-            // pero el log dice 'Unknown column examen_fisico', así que 'notas' debe ser la correcta.
-            String sql = "INSERT INTO diagnostico (id_diagnostico, id_expediente, id_medico, padecimientos, diagnostico, notas, fecha) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+            // 2. Insertar usando el ID generado permitiendo id_paciente
+            // Usamos la columna 'notas' por defecto
+            String sql = "INSERT INTO diagnostico (id_diagnostico, id_expediente, id_medico, id_paciente, padecimientos, diagnostico, notas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, nextId);
             ps.setInt(2, diag.getIdExpediente());
-            ps.setInt(3, diag.getIdMedico()); // id_paciente eliminado
-            ps.setString(4, diag.getPadecimientos());
-            ps.setString(5, diag.getDiagnostico());
-            ps.setString(6, diag.getNotas());
+            ps.setInt(3, diag.getIdMedico()); 
+            ps.setInt(4, diag.getIdPaciente());
+            ps.setString(5, diag.getPadecimientos());
+            ps.setString(6, diag.getDiagnostico());
+            ps.setString(7, diag.getNotas());
             ps.execute();
             return true;
             
