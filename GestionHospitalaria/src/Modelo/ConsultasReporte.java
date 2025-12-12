@@ -19,9 +19,9 @@ public class ConsultasReporte extends Conexion {
         Connection con = getConexion();
         
         String sql = "SELECT " +
-                     "SUM(CASE WHEN estado = 'Realizada' THEN 1 ELSE 0 END) as atendidas, " +
-                     "SUM(CASE WHEN estado = 'Cancelada' THEN 1 ELSE 0 END) as canceladas, " +
-                     "SUM(CASE WHEN estado = 'Ausente' THEN 1 ELSE 0 END) as ausentes " +
+                     "SUM(CASE WHEN UPPER(estado) = 'REALIZADA' THEN 1 ELSE 0 END) as atendidas, " +
+                     "SUM(CASE WHEN UPPER(estado) = 'CANCELADA' THEN 1 ELSE 0 END) as canceladas, " +
+                     "SUM(CASE WHEN UPPER(estado) = 'AUSENTE' THEN 1 ELSE 0 END) as ausentes " +
                      "FROM cita";
         
         try {
@@ -58,16 +58,18 @@ public class ConsultasReporte extends Conexion {
         Connection con = getConexion();
         
         String sql = "SELECT " +
-                     "SUM(CASE WHEN estado = 'Realizada' THEN 1 ELSE 0 END) as atendidas, " +
-                     "SUM(CASE WHEN estado = 'Cancelada' THEN 1 ELSE 0 END) as canceladas, " +
-                     "SUM(CASE WHEN estado = 'Ausente' THEN 1 ELSE 0 END) as ausentes " +
+                     "SUM(CASE WHEN UPPER(estado) = 'REALIZADA' THEN 1 ELSE 0 END) as atendidas, " +
+                     "SUM(CASE WHEN UPPER(estado) = 'CANCELADA' THEN 1 ELSE 0 END) as canceladas, " +
+                     "SUM(CASE WHEN UPPER(estado) = 'AUSENTE' THEN 1 ELSE 0 END) as ausentes " +
                      "FROM cita " +
                      "WHERE DATE(fecha_hora) BETWEEN ? AND ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, modelo.getFechaInicio());
-            ps.setString(2, modelo.getFechaFin());
+            // Convertir String YYYY-MM-DD a java.sql.Date para mayor seguridad
+            ps.setDate(1, java.sql.Date.valueOf(modelo.getFechaInicio()));
+            ps.setDate(2, java.sql.Date.valueOf(modelo.getFechaFin()));
+            
             rs = ps.executeQuery();
             
             if (rs.next()) {
